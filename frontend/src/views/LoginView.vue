@@ -50,13 +50,15 @@ export default {
         }
       }
       input[type=submit] {
+        width: 100%;
         background-color: #1b595c;
         color: white;
         padding: .8rem 1.2rem;
         margin: .5rem 0;
         border: 1px solid white;
+        border-radius: unset;
         cursor: pointer;
-        width: 100%;
+        
       }
       input[type=submit]:hover {
         background-color: #154a44;
