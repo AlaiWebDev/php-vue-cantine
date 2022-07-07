@@ -63,6 +63,9 @@ export default {
         color: #fbc522;
         border: 1px solid #fbc522;
       }
+      a {
+          color:green;
+      }
     }
 }
 </style>
