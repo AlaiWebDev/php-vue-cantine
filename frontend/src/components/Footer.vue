@@ -1,6 +1,8 @@
 <template>
   <footer class="footer">
+    
     <address>
+      <small>&copy; Copyright 2022, Alain ORLUK - ID-Formation</small>
       <ul>
         <li>
           <a href="https://id-formation.com/" target="_blank">ID School</a>
@@ -28,22 +30,35 @@ export default {
   position:absolute;
   bottom:0;
   width: 100%;
-  height:60px;
-  // padding:1.5rem;
-  ul {
+  height:24px;
+  address {
+    display: flex;
+    justify-content: space-between;
     background-color: #f2f2f2;
+    small {
+      padding: .2rem .2rem;
+    }
+    ul {
     display: flex;
     justify-content:center;
+    align-items: center;
+    margin-right: 5rem;
     list-style-type: none;
     li {
       a {
-        display: inline-block;
-        padding: 1.3rem;
+        padding: .5rem;
+        padding-bottom: 0;
         text-decoration: none;
-        color:green;
+        color:#5c8c9c;
+        font-weight: bold;
+      }
+      a:hover {
+        color: #154a44;
       }
     }
   }
+  }
+  
 }
 
 </style>

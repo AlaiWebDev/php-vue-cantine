@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <img src="../assets/menu.jpg" alt="">
+    <img src="../assets/menu.jpg" alt="menu de la semaine">
   </div>
 </template>
 
@@ -14,6 +14,7 @@ export default {
   .home {
     img {
       width: 50vw;
+      margin-top: 5rem;
     }
   }
 </style>

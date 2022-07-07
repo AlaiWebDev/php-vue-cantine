@@ -21,10 +21,10 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
 header {
-  margin-bottom: 3rem;
+  // margin-bottom: 3rem;
   background-color: white;
   a {
-    color:green;
+    // color:green;
   }
 }
 

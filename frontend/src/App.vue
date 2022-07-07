@@ -41,17 +41,18 @@ export default {
 header {
   display: flex;
   justify-content: space-between;
-  height: 10vh;
+  height: 8vh;
     nav { 
       display: flex;
       justify-content: space-between;
+      align-items: center;
       padding: 30px;
 
         a {
           padding: .5rem;
           text-decoration: none;
           font-weight: bold;
-          color:green;
+          color:#1b595c;
           &.router-link-exact-active {
             color: #42b983;
           }

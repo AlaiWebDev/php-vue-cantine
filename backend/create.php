@@ -19,7 +19,7 @@
     $item->user_name = $_POST['user_name'];
     $item->user_email = $_POST['user_email'];
     $item->user_phone = $_POST['user_phone'];
-    $item->user_password = $_POST['user_password'];
+    $item->user_password = $_POST['new-password'];
     $item->user_street = $_POST['user_street'];
     $item->user_city = $_POST['user_city'];
     $item->user_zipcode = $_POST['user_zipcode'];
