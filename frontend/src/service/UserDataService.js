@@ -1,0 +1,34 @@
+import axios from 'axios'
+
+const USER_API_URL = 'http://localhost/php-vue-cantine/backend'
+
+class UserDataService {
+
+    retrieveAllUsers() {
+
+        return axios.get(`${USER_API_URL}/read.php`);
+    }
+
+    retrieveUser(user_email, user_password) {
+
+        return axios.get(`${USER_API_URL}/single_user.php`, { params: { user_email: user_email, user_password: user_password } });
+    }
+
+    deleteUser(id) {
+
+        return axios.delete(`${USER_API_URL}/delete.php`, { params: { id: id } });
+    }
+
+    updateUser(user) {
+
+        return axios.put(`${USER_API_URL}/update.php`, user);
+    }
+
+    createUser(user) {
+
+        return axios.post(`${USER_API_URL}/create.php`, user);
+    }
+
+}
+
+export default new UserDataService()

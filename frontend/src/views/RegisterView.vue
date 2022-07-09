@@ -5,17 +5,17 @@
 			<form name="inscription" method="post" enctype="multipart/form-data">
 				<h1>Inscription</h1>
 				<div class="label">Nom</div>
-				<input type="text" name="user-name" required/>
+				<input type="text" name="user-name" v-model="user_name" required/>
 				<div class="label">E-mail</div>
-				<input type="text" name="user_email" required/>
+				<input type="text" name="user_email" v-model="user_email" required/>
         <div class="label">Téléphone</div>
-				<input type="text" name="user_phone" required/>
+				<input type="text" name="user_phone" v-model="user_phone" required/>
 				<div class="label">Rue</div>
-				<input type="text" name="user_street" required/>
+				<input type="text" name="user_street" v-model="user_street" required/>
 				<div class="label">Ville</div>
-				<input type="text" name="user_city" required/>
+				<input type="text" name="user_city" v-model="user_city" required/>
 				<div class="label">Code postal</div>
-				<input type="text" name="user_zipcode" required/>
+				<input type="text" name="user_zipcode" v-model="user_zipcode" required/>
 				<div class="label">Mot de passe</div>
 				<input type="password" required name="new-password" id="new-password" autocomplete="new-password"/>
 				<div class="label">Confirmation du mot de passe</div>
@@ -31,6 +31,67 @@
 
 export default {
   name: 'RegisterView',
+  data() {
+    return {
+      user_name: "",
+      user_email: "",
+      user_phone: "",
+      user_street: "",
+      user_city: "",
+      user_zipcode: "",
+      errors: [],
+    };
+  },
+  computed: {
+    id() {
+      return this.$route.params.id;
+    },
+  },
+  methods: {
+    refreshUserDetails() {
+       if (this.id != -1) {
+      UserDataService.retrieveUser(this.id).then((res) => {
+        this.first_name = res.data.first_name;
+        this.last_name = res.data.last_name;
+        this.email_id = res.data.email_id;
+      });
+       }
+    },
+    validateAndSubmit(e) {
+      e.preventDefault();
+      this.errors = [];
+      if (!this.first_name) {
+        this.errors.push("Enter valid values");
+      } else if (this.first_name.length < 5) {
+        this.errors.push("Enter atleast 5 characters in First Name");
+      }
+      if (!this.last_name) {
+        this.errors.push("Enter valid values");
+      } else if (this.last_name.length < 5) {
+        this.errors.push("Enter atleast 5 characters in Last Name");
+      }
+      if (this.errors.length === 0) {
+        if (this.id == -1) {
+          UserDataService.createUser({
+            first_name: this.first_name,
+            last_name: this.last_name,
+            email_id: this.email_id,
+          }).then(() => {
+            this.$router.push("/users");
+          });
+        } else {
+          UserDataService.updateUser({
+            id: this.id,
+            first_name: this.first_name,
+            last_name: this.last_name,
+            email_id: this.email_id,
+          }).then(() => {
+            this.$router.push("/users");
+          });
+        }
+      }
+    },
+  }
 }
 </script>
 <style lang="scss" scoped>

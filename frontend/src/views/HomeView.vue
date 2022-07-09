@@ -6,8 +6,13 @@
 
 <script>
 
+
 export default {
   name: 'HomeView',
+  data: function () {
+    return {
+    }
+  }
 }
 </script>
 <style lang="scss">

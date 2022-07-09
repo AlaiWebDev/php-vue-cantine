@@ -7,16 +7,12 @@
     <title>Document</title>
 </head>
 <body>
-    <form method="post" action="create.php">
-        <label>Nom <input type="text" name="user_name"></label>
+    <form method="get" action="single_user.php">
+
         <label>E-mail<input type="text" name="user_email"></label>
-        <label>Téléphone<input type="text" name="user_phone"></label>
-        <label>Mot de passe<input type="text" name="user_password"></label>
-        <label>Rue<input type="text" name="user_street"></label>
-        <label>Ville<input type="text" name="user_city"></label>
-        <label>Code postal<input type="text" name="user_zipcode"></label>
-        <input hidden type="text" name="user_profile" value=0>
-        <input type="submit" name="sublit" value="Créer">
+
+        <label>Mot de passe<input type="text" name="new-password"></label>
+        <input type="submit" name="submit" value="Connecter">
     </form>
 </body>
 </html>

@@ -1,24 +1,34 @@
 <template>
-<Header v-if="!isConnected"/>
-<HeaderConnected v-else/>
+<Header :connected="connectionStatus" @connectionStatus="false"/>
+{{ connectionStatus }}
 <router-view/>
 <Footer />
 </template>
 <script>
+import getCookie from '@/mixins//getCookiesMixin';
 import Header from './components/Header.vue'
-import HeaderConnected from './components/HeaderConnected.vue'
 import Footer from './components/Footer.vue'
 export default {
   name: 'App',
   components: {
     Header,
-    HeaderConnected,
     Footer
   },
+  mixins: [
+    getCookie
+  ],
   data() {
     return {
-      isConnected: false
     }
+  },
+  computed: {
+    connectionStatus: function () {
+      if (this.getCookie("UserName")) {
+        return true;
+      }
+    }
+  },
+  methods: {
   }
 }
 </script>

@@ -2,20 +2,70 @@
   <div id="container">
 			<!-- zone de connexion -->
 			<img src="../assets/logo-transparent.png" alt="logo">
-      <form method="POST">
+      <form @submit="validateAndSubmit">
           <h1>Connexion</h1>
-				    <input type="text" name="user_email" required placeholder="exemple@domaine.com" role="presentation" autocomplete="1234"/>
-				    <input type="password" required name="new-password" id="new-password" autocomplete="new-password" placeholder="Mot de passe"/>
-          <input type="submit" name="connect" value="Connexion" />
+				    <input type="text" name="user_email" v-model="user_email" placeholder="exemple@domaine.com" role="presentation" autocomplete="1234"/>
+				    <input type="password" name="new-password" v-model="user_password" id="new-password" autocomplete="new-password" placeholder="Mot de passe"/>
+          <input type="submit" value="Connexion" />
           <label>Pas encore inscrit ?</label> 
           <router-link to="/register">Inscription</router-link>
-      </form>	
+          <div v-if="errors.length">
+          <div
+            class="alert alert-danger"
+            v-bind:key="index"
+            v-for="(error, index) in errors"
+          >
+            {{ error }}
+          </div>
+        </div>
+      </form>
+      {{ user.id }}	
   </div>
 </template>
 <script>
-
+import UserDataService from "../service/UserDataService";
 export default {
   name: 'LoginView',
+  data() {
+    return {
+      user_email: "",
+      user_password: "",
+      errors: [],
+      user: {}
+    };
+  },
+  methods: {
+    validateAndSubmit(e) {
+      e.preventDefault();
+      this.errors = [];
+      if (!this.user_email) {
+        this.errors.push("Merci de renseigner l'e-mail associé à votre compte");
+      } else  {
+        let regex = new RegExp('[a-z0-9]+@[a-z]+\.[a-z]{2,3}');
+        if (!regex.test(this.user_email)){
+          this.errors.push("La forme de l'e-mail est incorrecte");
+        }
+      }
+      if (!this.user_password) {
+        this.errors.push("Merci de renseigner le mot de passe associé à votre compte");
+      }
+      if (this.errors.length === 0) {
+          UserDataService.retrieveUser(
+            this.user_email,
+            this.user_password,
+          ).then((res) => {
+        this.user = res.data;
+        let d = new Date();
+        d.setTime(d.getTime() + 1 * 24 * 60 * 60 * 1000);
+        let expires = "expires=" + d.toUTCString();
+        document.cookie = "UserName=" + this.user.user_name + ";" + expires + ";path=/";
+        document.cookie = "UserLevel=" + this.user.user_profile + ";" + expires + ";path=/";
+        this.$store.commit('setStatus',true);
+        this.$router.push(`/`);
+      });
+      }
+    },
+  }
 }
 </script>
 <style lang="scss">
