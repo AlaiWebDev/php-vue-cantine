@@ -3,6 +3,7 @@
     <img src="../assets/logo.png" alt="">
     <nav>
       <router-link to="/">Accueil</router-link>
+      <router-link to="/inbox" v-if="this.$store.state.connectStatus">Messagerie</router-link>
       <router-link to="/login" v-if="!this.$store.state.connectStatus">Connexion</router-link>
       <router-link to="/login" v-else @click="disconnect">Déconnexion</router-link>
       <router-link to="/register" v-if="!this.$store.state.connectStatus">Inscription</router-link>

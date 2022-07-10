@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const USER_API_URL = 'http://localhost/php-vue-cantine/backend'
+const USER_API_URL = 'http://localhost/php-vue-cantine/backend/users'
 
 class UserDataService {
 
@@ -11,7 +11,7 @@ class UserDataService {
 
     retrieveUser(user_email, user_password) {
 
-        return axios.get(`${USER_API_URL}/single_user.php`, { params: { user_email: user_email, user_password: user_password } });
+        return axios.get(`${USER_API_URL}/single_user.php`, { params: { user_email: user_email, user_password: user_password } }, {withCredentials: true});
     }
 
     deleteUser(id) {

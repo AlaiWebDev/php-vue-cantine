@@ -62,12 +62,10 @@
             $this->user_profile=htmlspecialchars(strip_tags($this->user_profile));
                    
             // bind data
-            // $encrypted_password = password_hash($this->user_password, PASSWORD_DEFAULT);
             $stmt->bindParam(":user_name", $this->user_name);
             $stmt->bindParam(":user_email", $this->user_email);
             $stmt->bindParam(":user_phone", $this->user_phone);
             $stmt->bindParam(":user_password", $this->user_password);
-            // $stmt->bindParam(":user_password", $encrypted_password);
             $stmt->bindParam(":user_street", $this->user_street);
             $stmt->bindParam(":user_city", $this->user_city);
             $stmt->bindParam(":user_zipcode", $this->user_zipcode);
@@ -87,13 +85,13 @@
                   FROM
                     ". $this->dbTable ."
                 WHERE 
-                   user_email = :user_email AND user_password = :user_password";
+                   user_email = :user_email";
 
         $stmt = $this->conn->prepare($sqlQuery);
         
         $stmt->bindParam(':user_email', $this->user_email);
         // $encrypted_password = password_hash($this->user_password, PASSWORD_DEFAULT);
-        $stmt->bindParam(':user_password', $this->user_password);
+        // $stmt->bindParam(':user_password', $this->user_password);
 
         $stmt->execute();
 

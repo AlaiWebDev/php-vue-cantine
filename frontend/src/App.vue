@@ -1,11 +1,10 @@
 <template>
 <Header :connected="connectionStatus" @connectionStatus="false"/>
-{{ connectionStatus }}
 <router-view/>
 <Footer />
 </template>
 <script>
-import getCookie from '@/mixins//getCookiesMixin';
+import getCookie from '@/mixins/getCookiesMixin';
 import Header from './components/Header.vue'
 import Footer from './components/Footer.vue'
 export default {
@@ -24,6 +23,7 @@ export default {
   computed: {
     connectionStatus: function () {
       if (this.getCookie("UserName")) {
+        this.$store.commit('setStatus', true)
         return true;
       }
     }

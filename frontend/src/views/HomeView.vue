@@ -1,17 +1,40 @@
 <template>
   <div class="home">
-    <img src="../assets/menu.jpg" alt="menu de la semaine">
+    <img v-if="!status" src="../assets/menu.jpg" alt="menu de la semaine">    
+    <Children v-else :children="allChildren"/>
   </div>
 </template>
 
 <script>
-
-
+import getCookie from '@/mixins/getCookiesMixin';
+import ChildrenDataService from "../service/ChildrenDataService";
+import Children from '@/components/Children';
 export default {
   name: 'HomeView',
+  components: {
+    Children
+  },
+  mixins: [
+    getCookie
+  ],
   data: function () {
     return {
+      allChildren: [],
+      status: this.getCookie("UserName")
     }
+  },
+  beforeMount() {
+    if (this.getCookie("UserName")) {
+        ChildrenDataService.retrieveChildren(
+            this.getCookie("UserID"),
+          ).catch(function(e) {
+            return e;
+          }).then((res) => {
+            if (res.status == 200) {
+                this.allChildren = res.data;
+            }
+          });
+      }
   }
 }
 </script>

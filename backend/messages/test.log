@@ -1,0 +1,8 @@
+object(stdClass)#4 (3) {
+  ["user_id"]=>
+  string(2) "18"
+  ["user_profile"]=>
+  string(1) "2"
+  ["user_message"]=>
+  string(6) "coucou"
+}

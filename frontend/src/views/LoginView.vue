@@ -10,16 +10,19 @@
           <label>Pas encore inscrit ?</label> 
           <router-link to="/register">Inscription</router-link>
           <div v-if="errors.length">
-          <div
-            class="alert alert-danger"
-            v-bind:key="index"
-            v-for="(error, index) in errors"
-          >
-            {{ error }}
+            <div
+              class="alert"
+              v-bind:key="index"
+              v-for="(error, index) in errors"
+            >
+              {{ error }}
+            </div>
           </div>
-        </div>
-      </form>
-      {{ user.id }}	
+          <div v-else
+            class="alert"
+          >
+          </div>
+      </form>	
   </div>
 </template>
 <script>
@@ -31,6 +34,7 @@ export default {
       user_email: "",
       user_password: "",
       errors: [],
+      myError: [],
       user: {}
     };
   },
@@ -53,22 +57,33 @@ export default {
           UserDataService.retrieveUser(
             this.user_email,
             this.user_password,
-          ).then((res) => {
-        this.user = res.data;
-        let d = new Date();
-        d.setTime(d.getTime() + 1 * 24 * 60 * 60 * 1000);
-        let expires = "expires=" + d.toUTCString();
-        document.cookie = "UserName=" + this.user.user_name + ";" + expires + ";path=/";
-        document.cookie = "UserLevel=" + this.user.user_profile + ";" + expires + ";path=/";
-        this.$store.commit('setStatus',true);
-        this.$router.push(`/`);
-      });
+          ).catch(function(e) {
+            let test = document.querySelectorAll(".alert");
+            let particularError = document.createElement("p");
+            particularError.textContent="Compte introuvable";
+            test[0].appendChild(particularError);
+            return e;
+          }).then((res) => {
+            if (res.status == 200) {
+                this.user = res.data;
+                this.$store.commit('setStatus',true);
+                let d = new Date();
+                d.setTime(d.getTime() + 1 * 24 * 60 * 60 * 1000);
+                let expires = "expires=" + d.toUTCString();
+                document.cookie = "UserName=" + this.user.user_name + ";" + expires + ";path=/";
+                document.cookie = "UserLevel=" + this.user.user_profile + ";" + expires + ";path=/";
+                document.cookie = "UserID=" + this.user.id + ";" + expires + ";path=/";
+                this.$router.push(`/`);
+            } else {
+                this.$store.commit('setStatus',false);
+            }
+          });
       }
     },
   }
 }
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
   #container{
     width:30%;
     margin: 11rem auto;
@@ -116,8 +131,27 @@ export default {
         border: 1px solid #fbc522;
       }
       a {
-          color:green;
+        padding: 1rem;
+        margin: auto;
+        margin-top: 1rem;
+        text-decoration: none;
+        background-color: #1b595c;
+        border: 1px solid white;
+        font-weight: bold;
+        color: white;
+        &.router-link-exact-active {
+          color: #42b983;
+        }   
       }
+    .alert {
+      font-weight: bold;
+      color: red;
+    }
+  }
+  a:hover {
+        background-color: #154a44;
+        color: #fbc522;
+        border: 1px solid #fbc522;
     }
 }
 </style>
