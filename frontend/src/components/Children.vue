@@ -22,7 +22,7 @@
             </tr>
         </tbody>
     </table>
-    <router-link to="/addchild" v-if="this.$store.state.connectStatus">Inscrire mon enfant</router-link>
+    <router-link to="/addchild">Inscrire mon enfant</router-link>
 </div>
 </template>
 
@@ -87,6 +87,7 @@ export default {
     }
     table, th, td {
         border: 1px solid black;
+        padding: .3rem;
     }
     tr {
         height: 2rem;

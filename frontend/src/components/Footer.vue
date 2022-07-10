@@ -30,7 +30,7 @@ export default {
   position:absolute;
   bottom:0;
   width: 100%;
-  height:24px;
+  height:25px;
   address {
     display: flex;
     justify-content: space-between;

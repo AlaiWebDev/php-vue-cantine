@@ -98,7 +98,7 @@ export default {
 <style lang="scss" scoped>
   #container{
     width:30%;
-    margin: .4rem auto;
+    margin: 3rem auto;
     padding: 1.5rem;
     border: 1px solid #f1f1f1;
     background: #fff;

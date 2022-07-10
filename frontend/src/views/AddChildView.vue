@@ -32,7 +32,8 @@
               {{ error }}
             </div>
           </div>
-			</form>   
+			</form>
+      <router-link to="/">Retour</router-link>  
   </div>
 </template>
 
@@ -57,6 +58,7 @@ export default {
 }
 </script>
 <style lang="scss">
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&family=Roboto:wght@300&family=Rowdies:wght@300&display=swap');
   #container {
     width:40%;
     margin: 11rem auto;
@@ -118,6 +120,9 @@ export default {
           text-align: left;
 
         }
+      }
+      select {
+        font-family: 'Roboto', sans-serif;
       }
     }
   }

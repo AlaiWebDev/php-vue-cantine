@@ -37,8 +37,9 @@ export default {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  font-size: 16px;
+  font-size: 14px;
   font-style: normal;
+  font-family: 'Roboto', sans-serif;
 }
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
@@ -46,12 +47,13 @@ export default {
   color: #2c3e50;
   background-image: url(./assets/background-image.jpg);
   background-repeat: no-repeat;
+  background-size: cover;
   height: 100vh;
 }
 header {
   display: flex;
   justify-content: space-between;
-  height: 8vh;
+  height: 6vh;
     nav { 
       display: flex;
       justify-content: space-between;

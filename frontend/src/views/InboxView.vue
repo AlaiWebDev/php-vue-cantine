@@ -26,7 +26,7 @@ export default {
   data: function () {
     return {
       messages: [],
-      isActive: true,
+      isActive: false,
       userId: "",
       userProfile: null,
       userMessage: "Tapez votre message…"
@@ -86,6 +86,7 @@ export default {
       flex-direction: column;
       justify-content: space-evenly;
       width:98%;
+      padding: .2rem;
       padding-top: .5rem;
       margin: auto;
       border: 1px solid #c5d0c6;
@@ -93,15 +94,19 @@ export default {
       box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
       p {
         width: 50%;
-        
+        font-style: italic;
+        margin: .2rem;
+        padding: .5rem;
+        border-radius: 6px;
       }
       .text-admin {
-        color: blue;
+        color: #1b595c;
+        background-color: #c5d0c6;
         margin-left: 0;
       }
       .text-user {
-        color: green;
-        font-style: italic;
+        color: #154a44;
+        background-color: #c5d0c6;
         margin-left: 50%;
       }
     }
