@@ -1,5 +1,4 @@
 <template>
-<h1>Espace Enfants</h1>
 <div id="container">
     <img src="../assets/logo-transparent.png" alt="logo">
     <table>
@@ -39,9 +38,9 @@ export default {
         }
     },
     computed: {
-        selected: function () {
-            return this.children;
-        }
+        // selected: function () {
+        //     return this.children;
+        // }
     },
     beforeUpdate() {
         this.selected = this.children;

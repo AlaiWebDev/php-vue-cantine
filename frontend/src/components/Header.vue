@@ -3,7 +3,7 @@
     <img src="../assets/logo.png" alt="">
     <nav>
       <router-link to="/">Accueil</router-link>
-      <router-link to="/inbox" v-if="this.$store.state.connectStatus">Messagerie</router-link>
+      <router-link to="/inbox" v-if="this.$store.state.connectStatus" @click="messages=0">Messagerie<span v-if="messages != 0" id="signal_messages">{{ messages }}</span></router-link>
       <router-link to="/login" v-if="!this.$store.state.connectStatus">Connexion</router-link>
       <router-link to="/login" v-else @click="disconnect">Déconnexion</router-link>
       <router-link to="/register" v-if="!this.$store.state.connectStatus">Inscription</router-link>
@@ -19,6 +19,9 @@ export default {
     return {
     }
   },
+  props: [
+    "messages"
+  ],
   mixins: [
     clearCookies
   ],
@@ -35,6 +38,15 @@ export default {
 <style scoped lang="scss">
 header {
   background-color: white;
+
+  #signal_messages {
+    position: relative;
+    top: -5px;
+    padding: 0 .4rem;
+    border-radius: 50%;
+    color: white;
+    background-color: red;
+  }
 }
 
 </style>

@@ -8,6 +8,7 @@
 
     include_once '../config/database.class.php';
     include_once '../class/user.class.php';
+    include_once '../class/message.class.php';
 
     $database = new DB();
     $db = $database->getConnection();
@@ -25,11 +26,19 @@
     $item->user_city = $data->user_city;
     $item->user_zipcode = $data->user_zipcode;
     $item->user_profile = $data->user_profile;
-      
     if($item->createUser()){
         echo json_encode("User created.");
+        $last_id = $db->lastInsertId();
+        $db = null;
+        $welcome_message = "Le service de cantine ID Restauration vous souhaite la bienvenue sur votre espace dédié.";
+        $db = $database->getConnection();
+        $item = new Message($db);
+        $item->user_id = $last_id;
+        $item->user_profile = 0;
+        $item->user_message = $welcome_message;
+        $item->sendMessage();
+        $db = null;
     } else{
         echo json_encode("Failed to create user.");
     }
-    $db = null;
 ?>

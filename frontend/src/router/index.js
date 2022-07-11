@@ -7,8 +7,9 @@ import AddChildView from '../views/AddChildView'
 
 const routes = [
   {
-    path: '/',
+    path: '/:newMessage?',
     name: 'home',
+    props: true,
     component: HomeView
   },
   {

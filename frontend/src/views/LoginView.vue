@@ -27,6 +27,8 @@
 </template>
 <script>
 import UserDataService from "../service/UserDataService";
+import MessageDataService from "../service/MessageDataService";
+import setCookie from "../mixins/setCookieMixin";
 export default {
   name: 'LoginView',
   data() {
@@ -35,9 +37,13 @@ export default {
       user_password: "",
       errors: [],
       myError: [],
-      user: {}
+      user: {},
+      newMessage: 0
     };
   },
+  mixins: [
+    setCookie
+  ],
   methods: {
     validateAndSubmit(e) {
       e.preventDefault();
@@ -57,7 +63,7 @@ export default {
           UserDataService.retrieveUser(
             this.user_email,
             this.user_password,
-          ).catch(function(e) {
+          ).catch(function() {
             let test = document.querySelectorAll(".alert");
             let particularError = document.createElement("p");
             particularError.textContent="Compte introuvable";
@@ -67,13 +73,23 @@ export default {
             if (res.status == 200) {
                 this.user = res.data;
                 this.$store.commit('setStatus',true);
-                let d = new Date();
-                d.setTime(d.getTime() + 1 * 24 * 60 * 60 * 1000);
-                let expires = "expires=" + d.toUTCString();
-                document.cookie = "UserName=" + this.user.user_name + ";" + expires + ";path=/";
-                document.cookie = "UserLevel=" + this.user.user_profile + ";" + expires + ";path=/";
-                document.cookie = "UserID=" + this.user.id + ";" + expires + ";path=/";
-                this.$router.push(`/`);
+                this.setCookie(this.user);
+                MessageDataService.checkUnreadMessages(
+                  this.user.id
+                ).catch(function (err) {
+                  throw(err);
+                }).then((result) => {
+                  if (result.status == 200) {
+                    const userMessages = result.data;
+                    userMessages.forEach(message => {
+                      if (message.acknowledge == 0) {
+                        this.newMessage++;
+                      }
+                      this.$router.push(`/${this.newMessage}`);
+                    });
+                  }
+                });
+                
             } else {
                 this.$store.commit('setStatus',false);
             }

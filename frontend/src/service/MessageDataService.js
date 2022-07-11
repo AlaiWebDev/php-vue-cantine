@@ -6,6 +6,10 @@ class MessageDataService {
 
     retrieveAllMessages(user_id) {
 
+        return axios.get(`${USER_API_URL}/acknowledge.php`, { params: { user_id: user_id} });
+    }
+    checkUnreadMessages(user_id) {
+
         return axios.get(`${USER_API_URL}/read.php`, { params: { user_id: user_id} });
     }
 

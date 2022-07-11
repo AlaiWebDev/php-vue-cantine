@@ -17,11 +17,18 @@ export default {
   mixins: [
     getCookie
   ],
+  props: [
+    "newMessage",
+  ],
   data: function () {
     return {
       allChildren: [],
       status: this.getCookie("UserName")
     }
+  },
+  mounted() {
+    console.log("messages : ",this.newMessage);
+    this.$emit("messages", this.newMessage);
   },
   beforeMount() {
     if (this.getCookie("UserName")) {
@@ -35,7 +42,7 @@ export default {
             }
           });
       }
-  }
+  },
 }
 </script>
 <style lang="scss">

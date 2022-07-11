@@ -1,6 +1,6 @@
 <template>
-<Header :connected="connectionStatus" @connectionStatus="false"/>
-<router-view/>
+<Header :messages="messageToRead" :connected="connectionStatus" @connectionStatus="false"/>
+<router-view @messages="signalMessage"/>
 <Footer />
 </template>
 <script>
@@ -18,17 +18,22 @@ export default {
   ],
   data() {
     return {
+      messageToRead: 0
     }
   },
   computed: {
     connectionStatus: function () {
       if (this.getCookie("UserName")) {
-        this.$store.commit('setStatus', true)
+        this.$store.commit('setStatus', true);
         return true;
       }
     }
   },
   methods: {
+    signalMessage: function (nbMessages) {
+      console.log("nbMessages : ", nbMessages);
+      this.messageToRead = nbMessages;
+    }
   }
 }
 </script>
@@ -47,7 +52,7 @@ export default {
   color: #2c3e50;
   background-image: url(./assets/background-image.jpg);
   background-repeat: no-repeat;
-  background-size: cover;
+  // background-size: cover;
   height: 100vh;
 }
 header {

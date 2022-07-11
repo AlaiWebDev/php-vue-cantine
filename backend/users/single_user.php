@@ -1,10 +1,6 @@
 <?php
     header("Access-Control-Allow-Origin: *");
     header("Access-Control-Allow-Credentials: true");
-    // header("Access-Control-Allow-Headers: X-Requested-With, 
-    // Content-Type, Origin, Cache-Control, Pragma, Authorization, 
-    // Accept, Accept-Encoding");
-    // header("Content-Type: application/json;");
     
     include_once '../config/database.class.php';
     include_once '../class/user.class.php';
@@ -22,9 +18,6 @@
             setcookie("UserName", "", time() - 3600);
             http_response_code(404);
             echo json_encode("User record not found.");
-            // $_SESSION["autoriser"] = "oui";
-            // $_SESSION["pseudo"] = strtoupper($tab[0]["user_login"]);
-            // header("location:session.php");
         } else {
             $user_Arr = array(
                 "id" =>  $item->id,
@@ -38,6 +31,7 @@
                 "user_profile" => $item->user_profile,
             );
             http_response_code(200);
+            $db = null;
             setcookie("UserName", $item->user_name, time()+3600);  /* expire dans 1 heure */
             echo json_encode($user_Arr);
         } 

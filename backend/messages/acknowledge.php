@@ -21,6 +21,8 @@
         
         $userArr = array();
 
+        $db = $database->getConnection();
+        $ack = new Message($db);
         while ($row = $stmt->fetch(PDO::FETCH_ASSOC)){
             extract($row);
             $e = array(
@@ -31,6 +33,13 @@
                 "acknowledge" => $acknowledge,
                 "message_created" => $message_created
             );
+            foreach ($e as $key => $value) {
+                if ($key === "id") {
+                    $ack->id = $value;
+                    $ack->acknowledge = true;
+                    $ack->updateMessage();
+                }
+            }
             array_push($userArr, $e);
         }
         echo json_encode($userArr);
