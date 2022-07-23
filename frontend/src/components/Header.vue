@@ -1,6 +1,6 @@
 <template>
   <header>
-    <img src="../assets/logo.png" alt="">
+    <img src="../assets/logo.jpg" alt="">
     <nav>
       <router-link to="/">Accueil</router-link>
       <router-link to="/inbox" v-if="this.$store.state.connectStatus" @click="messages=0">Messagerie<span v-if="messages != 0" id="signal_messages">{{ messages }}</span></router-link>
