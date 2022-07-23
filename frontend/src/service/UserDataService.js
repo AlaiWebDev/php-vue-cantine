@@ -26,7 +26,16 @@ class UserDataService {
 
     createUser(user) {
 
-        return axios.post(`${USER_API_URL}/create.php`, user);
+        // return axios.post(`${USER_API_URL}/create.php`, user);
+        const options = {
+            method: "POST",
+            // headers: {
+            //     Accept: "application/json",
+            //     "Content-Type": "application/json;charset=UTF-8",
+            //   },
+            body: JSON.stringify(user)
+        }
+        return fetch(`${USER_API_URL}/create.php`, options);
     }
 
 }
