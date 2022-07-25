@@ -98,8 +98,9 @@ export default {
 <style lang="scss" scoped>
   #container{
     width:30%;
-    margin: 3rem auto;
+    margin: 2rem auto 3rem auto;
     padding: 1.5rem;
+    font-size: .5rem;
     border: 1px solid #f1f1f1;
     background: #fff;
     box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
@@ -114,11 +115,12 @@ export default {
         flex-direction: column;
         width:100%;
         padding: 1.5rem;
+        padding-bottom: 0;
         border: 1px solid #c5d0c6;
         background: #fff;
         box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
         h1 {
-          font-size: 1.5rem;
+          // font-size: 1.5rem;
           letter-spacing: .4rem;
           padding-bottom: 1rem;
           text-transform: uppercase;

@@ -42,7 +42,7 @@ export default {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  font-size: 14px;
+  font-size: 12px;
   font-style: normal;
   font-family: 'Roboto', sans-serif;
 }
@@ -52,19 +52,19 @@ export default {
   color: #2c3e50;
   background-image: url(./assets/background-image.jpg);
   background-repeat: no-repeat;
-  // background-size: cover;
+  background-size:cover;
   height: 100vh;
 }
 header {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   height: 6vh;
     nav { 
       display: flex;
       justify-content: space-between;
       align-items: center;
       padding: 30px;
-
         a {
           padding: .5rem;
           text-decoration: none;

@@ -38,7 +38,9 @@ export default {
 <style scoped lang="scss">
 header {
   background-color: white;
-
+  img {
+    height: 45px;
+  }
   #signal_messages {
     position: relative;
     top: -5px;
